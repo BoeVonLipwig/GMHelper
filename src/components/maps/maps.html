@@ -1,0 +1,8 @@
+<ion-list inset>
+  <ion-card *ngFor="let map of data.maps" (click)="goToMap(map)">
+    <ion-card-content>
+      <ion-card-title>{{map.name}}</ion-card-title>
+    </ion-card-content>
+    <img src="{{map.img}}"/>
+  </ion-card>
+</ion-list>

@@ -11,11 +11,11 @@
         <ion-icon name="globe"></ion-icon>
         Maps
       </ion-segment-button>
-      <ion-segment-button value="playerCharacters">
+      <ion-segment-button value="players">
         <ion-icon name="person"></ion-icon>
         Players
       </ion-segment-button>
-      <ion-segment-button value="NPCs">
+      <ion-segment-button value="npcs">
         <ion-icon name="people"></ion-icon>
         NPCs
       </ion-segment-button>
@@ -29,72 +29,18 @@
 
 
 <ion-content padding>
-  <div [ngSwitch]="tab">
-    <ion-list *ngSwitchCase="'maps'" inset>
-      <ion-card *ngFor="let map of maps" (click)="goToMap(map)">
-        <p><img src="{{map.img}}" /></p>
-        <div class="card-title">{{map.name}}</div>
-      </ion-card>
-    </ion-list>
 
+    <maps *ngIf="tab == 'maps'" [navCtrl]="navCtrl"></maps>
 
-    <ion-list *ngSwitchCase="'playerCharacters'" reorder="true" (ionItemReorder)="reorderItems($event)">
-      <ion-item-sliding *ngFor="let player of players">
-        <button ion-item (click)="goToChar(player)">
-          {{player.name}} the {{player.race}} {{player.charClass}}
-        </button>
+    <entity-list *ngIf="tab !== 'maps'" [listType]="tab" [navCtrl]="navCtrl"></entity-list>
 
-        <ion-item-options>
-          <button ion-button icon-only (click)="checkDelete(players.indexOf(player))" color='danger'>
-            <ion-icon name="trash"></ion-icon>
-          </button>
-        </ion-item-options>
-
-      </ion-item-sliding>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'NPCs'" reorder="true" (ionItemReorder)="reorderItems($event)">
-      <ion-item-sliding *ngFor="let npc of npcs">
-        <button ion-item (click)="goToChar(npc)">
-          {{npc.name}} the {{npc.race}} {{npc.charClass}}
-        </button>
-
-        <ion-item-options>
-          <button ion-button icon-only (click)="checkDelete(npcs.indexOf(npc))" color='danger'>
-            <ion-icon name="trash"></ion-icon>
-          </button>
-        </ion-item-options>
-
-      </ion-item-sliding>
-    </ion-list>
-
-    <ion-list *ngSwitchCase="'mobs'" reorder="true" (ionItemReorder)="reorderItems($event)">
-      <ion-item-sliding *ngFor="let mob of mobs">
-        <button ion-item (click)="goToChar(mob)">
-          {{mob.name}} the {{mob.race}} {{mob.charClass}}
-        </button>
-
-        <ion-item-options>
-          <button ion-button icon-only (click)="checkDelete(mobs.indexOf(mob))" color='danger'>
-            <ion-icon name="trash"></ion-icon>
-          </button>
-        </ion-item-options>
-
-      </ion-item-sliding>
-    </ion-list>
-
-    <ion-fab right bottom *ngSwitchCase="'maps'">
-      <button ion-fab (click)="fake()" color="red">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
 
     <ion-fab right bottom *ngIf="tab != 'maps'">
       <button ion-fab color="blue">
         <ion-icon name="menu"></ion-icon>
       </button>
       <ion-fab-list side="left">
-        <button ion-fab color="blue" (click)="add()">
+        <button ion-fab color="blue" (click)="addCharacter()">
           <ion-icon name="add"></ion-icon>
         </button>
         <button ion-fab (click)="loadCloud()">
@@ -103,5 +49,10 @@
       </ion-fab-list>
 
     </ion-fab>
-  </div>
+
+  <ion-fab right bottom *ngIf="tab == 'maps'">
+    <button ion-fab (click)="addMap()" color="red">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
