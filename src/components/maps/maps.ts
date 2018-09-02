@@ -17,10 +17,8 @@ export class MapsComponent {
 
   text: string;
   @Input() navCtrl : NavController;
-
+//This will produce a warning saying that data is not used, it is used in the html
   constructor(private data: DataProvider) {
-    console.log('Hello MapsComponent Component');
-    this.text = 'Hello World';
   }
 
   goToMap(map: any) {

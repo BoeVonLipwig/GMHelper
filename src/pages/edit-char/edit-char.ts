@@ -68,7 +68,7 @@ export class EditCharPage {
     this.newCharacter.maxHitPoints = this.maxHitPoints;
     const toast = this.toastCtrl.create({
       message: 'Character was saved to cloud successfully.',
-      duration: 3000,
+      duration: 2000,
       position: 'top'
     });
     toast.present();

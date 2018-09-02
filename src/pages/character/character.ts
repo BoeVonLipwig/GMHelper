@@ -38,7 +38,7 @@ export class CharacterPage {
     this.firebase.send(this.character.name, this.character.charClass, this.character.maxHitPoints, this.character.race, this.character.type).then(console.log);
     const toast = this.toastCtrl.create({
       message: 'Character was saved to cloud successfully.',
-      duration: 3000,
+      duration: 2000,
       position: 'top'
     });
     toast.present();

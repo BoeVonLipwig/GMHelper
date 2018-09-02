@@ -49,7 +49,7 @@ export class HomePage {
     this.data[this.tab].push(new CharacterModel(data.name, data.race, data.charClass, this.tab));
     const toast = this.toastCtrl.create({
       message: 'Character was saved successfully.',
-      duration: 3000,
+      duration: 2000,
       position: 'top'
     });
     toast.present();
@@ -78,7 +78,7 @@ export class HomePage {
 
   getImage(name: string) {
     const options: CameraOptions = {
-      quality: 70,
+      quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       saveToPhotoAlbum: false
@@ -90,15 +90,17 @@ export class HomePage {
     );
 
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
       this.data.maps.push({img: 'data:image/jpeg;base64,' + imageData, name: name});
-    }, (err) => {
-      // Handle error
     });
   }
 
   loadCloud() {
+    const toast = this.toastCtrl.create({
+      message: 'Loading... may take a second',
+      duration: 800,
+      position: 'middle'
+    });
+    toast.present();
     let alert = this.alertCtrl.create();
     alert.setTitle('Download a pre-made character');
 
@@ -133,7 +135,7 @@ export class HomePage {
 
     const toast = this.toastCtrl.create({
       message: 'Character was downloaded successfully.',
-      duration: 3000,
+      duration: 2000,
       position: 'top'
     });
     toast.present();
